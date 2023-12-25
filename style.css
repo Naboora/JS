@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.Contenedor {
+    display: flex;
+    background-color: aqua;
+    padding: 50px;
+    border-radius: 10px;
+}
+.Contenedor-Costos {
+    padding: 20px;
+}
+
+.botoncito-de-cards{
+    border: 0;
+    background-image: linear-gradient(
+        150deg,
+        #D34848,
+        #FF8162,
+        #FFFA67
+    ) ;
+border-radius: 8px;
+color: white;
+display: flex;
+padding: 2px;
+cursor: pointer;
+font-size: 18px;
+transition: .3s;
+}
+.botoncito-de-cards a {
+    background-color: #222831;
+    padding: 7px 14px;
+    border-radius: 6px;
+    transition: .3s;
+    text-decoration: none;
+    color: white;
+    
+}
+
+.botoncito-de-cards:hover .span-card{
+    background: none;
+}
+

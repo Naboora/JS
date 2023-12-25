@@ -1,36 +1,62 @@
-function calculadora() {
-    while (true) {
-        let calculo = prompt("Ingrese la calculo que desea realizar:\nSuma (+), Resta (-), Multiplicación (*), División (/)\nIngrese 'salir' para salir.");
+let carrito = [];
+let total = 0;
+let saldoDisponible = 0;
 
-        if (calculo === 'salir') {
-            alert("Saliendo de la calculadora.....");
-            break;
-        }
+var nombre = prompt("Por favor, ingresa tu nombre:");
 
-        if (calculo === '+' || calculo === '-' || calculo === '*' || calculo === '/') {
-            let num1 = parseFloat(prompt("Ingrese el primer numero:"));
-            let num2 = parseFloat(prompt("Ingrese el segundo numero:"));
+if (nombre !== null && nombre !== "") {
+    alert("¡Hola, " + nombre + "! Bienvenido a Beer and Burgers.");
+} else {
+    alert("¡Hola, visitante! Bienvenido a Beer and Burgers.");
+}
 
-            if (calculo === '+') {
-                let resultado = num1 + num2;
-                alert("El resultado de la suma es: " + resultado);
-            } else if (calculo === '-') {
-                let resultado = num1 - num2;
-                alert("El resultado de la resta es: " + resultado);
-            } else if (calculo === '*') {
-                let resultado = num1 * num2;
-                alert("El resultado de la multiplicación es: " + resultado);
-            } else if (calculo === '/') {
-                if (num2 !== 0) {
-                    let resultado = num1 / num2;
-                    alert("El resultado de la división es: " + resultado);
-                } else {
-                    alert("No se puede dividir por cero.");
-                }
-            }
-        } else {
-            alert("Intente de nuevo.");
-        }
+function actualizarSaldoDisponible() {
+    var cantidadDinero = prompt("¿Cuánto dinero tienes,recorda que el minimo valor es de $1200?");
+    saldoDisponible = parseFloat(cantidadDinero);
+
+    if (!isNaN(saldoDisponible)) {
+        var resultadoDinero = document.getElementById("dinero");
+        resultadoDinero.textContent = "Tienes $" + saldoDisponible.toFixed(2);
+    } else {
+        alert("Por favor, ingresa una cantidad válida.");
     }
 }
-calculadora();
+
+function agregarAlCarrito(nombre, precio) {
+    if (precio <= saldoDisponible) { 
+        carrito.push({ nombre, precio });
+        saldoDisponible -= precio; 
+        actualizarCarrito();
+    } else {
+        alert("No tienes suficiente dinero para comprar este artículo.");
+    }
+}
+
+function actualizarCarrito() {
+    const carritoElement = document.getElementById("carrito");
+    const totalElement = document.getElementById("total");
+
+    carritoElement.innerHTML = "";
+
+    carrito.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `${item.nombre}: $${item.precio.toFixed(2)} <button onclick="quitarDelCarrito(${index})">X</button>`;
+        carritoElement.appendChild(li);
+    });
+
+    totalElement.innerText = saldoDisponible.toFixed(2);
+}
+
+function quitarDelCarrito(index) {
+    saldoDisponible += carrito[index].precio;
+    carrito.splice(index, 1);
+    actualizarCarrito();
+}
+var boton = document.getElementById("pagarBoton");
+boton.addEventListener("click", function() {
+
+    alert("Disfrute su comida");
+
+});
+
+actualizarSaldoDisponible();
